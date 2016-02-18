@@ -1,0 +1,34 @@
+#version HMCCS155FALL2002
+
+/*
+ * texture mapped box primitive.
+ */
+
+#background	0.0 0.0 0.3
+
+#camera
+
+	-3 -3 -3	// position
+	1 1 1	// facing
+	0 1 0	// up
+	30.0			// heightAngle  
+
+
+#light_dir -n DirectionalLight1 --
+1.0	1.0	1.0	// color
+1.0	1.0	0.5.0	// direction
+
+
+#material -n mWhite --
+	0.0	0.0	0.0	// ambient
+	0.0	1.0	1.0	// diffuse
+	1.0	1.0	1.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.9	0.0	1.0	// kspec ktrans refind
+
+
+#box -n Box1 -m mWhite   --
+	0.0	0.0	0.0	// position
+	1.0	2.0	3.0	// dimensions
+
+#rayfile_end

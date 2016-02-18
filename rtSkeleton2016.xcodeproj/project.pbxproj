@@ -1,0 +1,406 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		113831D31C6A39F900E7A98A /* box.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831A01C6A39F900E7A98A /* box.cpp */; };
+		113831D41C6A39F900E7A98A /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831A21C6A39F900E7A98A /* camera.cpp */; };
+		113831D51C6A39F900E7A98A /* cone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831A51C6A39F900E7A98A /* cone.cpp */; };
+		113831D61C6A39F900E7A98A /* control.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831A71C6A39F900E7A98A /* control.cpp */; };
+		113831D71C6A39F900E7A98A /* cylinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831A91C6A39F900E7A98A /* cylinder.cpp */; };
+		113831D81C6A39F900E7A98A /* directionallight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831AB1C6A39F900E7A98A /* directionallight.cpp */; };
+		113831D91C6A39F900E7A98A /* geometry.cc in Sources */ = {isa = PBXBuildFile; fileRef = 113831AD1C6A39F900E7A98A /* geometry.cc */; };
+		113831DA1C6A39F900E7A98A /* group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831AF1C6A39F900E7A98A /* group.cpp */; };
+		113831DB1C6A39F900E7A98A /* image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831B11C6A39F900E7A98A /* image.cpp */; };
+		113831DC1C6A39F900E7A98A /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831B41C6A39F900E7A98A /* light.cpp */; };
+		113831DD1C6A39F900E7A98A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831B61C6A39F900E7A98A /* main.cpp */; };
+		113831DE1C6A39F900E7A98A /* material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831B81C6A39F900E7A98A /* material.cpp */; };
+		113831DF1C6A39F900E7A98A /* parse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831BA1C6A39F900E7A98A /* parse.cpp */; };
+		113831E01C6A39F900E7A98A /* perlin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831BC1C6A39F900E7A98A /* perlin.cpp */; };
+		113831E11C6A39F900E7A98A /* pointlight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831BE1C6A39F900E7A98A /* pointlight.cpp */; };
+		113831E21C6A39F900E7A98A /* rayfile_render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C01C6A39F900E7A98A /* rayfile_render.cpp */; };
+		113831E31C6A39F900E7A98A /* rayfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C11C6A39F900E7A98A /* rayfile.cpp */; };
+		113831E41C6A39F900E7A98A /* rayfileinstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C31C6A39F900E7A98A /* rayfileinstance.cpp */; };
+		113831E51C6A39F900E7A98A /* roots.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C51C6A39F900E7A98A /* roots.cpp */; };
+		113831E61C6A39F900E7A98A /* shape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C71C6A39F900E7A98A /* shape.cpp */; };
+		113831E71C6A39F900E7A98A /* shapegroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831C91C6A39F900E7A98A /* shapegroup.cpp */; };
+		113831E81C6A39F900E7A98A /* sphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831CB1C6A39F900E7A98A /* sphere.cpp */; };
+		113831E91C6A39F900E7A98A /* spotlight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831CD1C6A39F900E7A98A /* spotlight.cpp */; };
+		113831EA1C6A39F900E7A98A /* torus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831CF1C6A39F900E7A98A /* torus.cpp */; };
+		113831EB1C6A39F900E7A98A /* triangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 113831D11C6A39F900E7A98A /* triangle.cpp */; };
+		113831EF1C6A3A2B00E7A98A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113831EC1C6A3A2B00E7A98A /* Cocoa.framework */; };
+		113831F01C6A3A2B00E7A98A /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113831ED1C6A3A2B00E7A98A /* GLUT.framework */; };
+		113831F11C6A3A2B00E7A98A /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 113831EE1C6A3A2B00E7A98A /* OpenGL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		113831941C6A39DE00E7A98A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		113831961C6A39DE00E7A98A /* rtSkeleton2016 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rtSkeleton2016; sourceTree = BUILT_PRODUCTS_DIR; };
+		113831A01C6A39F900E7A98A /* box.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = box.cpp; sourceTree = "<group>"; };
+		113831A11C6A39F900E7A98A /* box.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = box.h; sourceTree = "<group>"; };
+		113831A21C6A39F900E7A98A /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
+		113831A31C6A39F900E7A98A /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
+		113831A41C6A39F900E7A98A /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		113831A51C6A39F900E7A98A /* cone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cone.cpp; sourceTree = "<group>"; };
+		113831A61C6A39F900E7A98A /* cone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cone.h; sourceTree = "<group>"; };
+		113831A71C6A39F900E7A98A /* control.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = control.cpp; sourceTree = "<group>"; };
+		113831A81C6A39F900E7A98A /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
+		113831A91C6A39F900E7A98A /* cylinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cylinder.cpp; sourceTree = "<group>"; };
+		113831AA1C6A39F900E7A98A /* cylinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cylinder.h; sourceTree = "<group>"; };
+		113831AB1C6A39F900E7A98A /* directionallight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = directionallight.cpp; sourceTree = "<group>"; };
+		113831AC1C6A39F900E7A98A /* directionallight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = directionallight.h; sourceTree = "<group>"; };
+		113831AD1C6A39F900E7A98A /* geometry.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = geometry.cc; sourceTree = "<group>"; };
+		113831AE1C6A39F900E7A98A /* geometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = geometry.h; sourceTree = "<group>"; };
+		113831AF1C6A39F900E7A98A /* group.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = group.cpp; sourceTree = "<group>"; };
+		113831B01C6A39F900E7A98A /* group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = group.h; sourceTree = "<group>"; };
+		113831B11C6A39F900E7A98A /* image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = image.cpp; sourceTree = "<group>"; };
+		113831B21C6A39F900E7A98A /* image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = image.h; sourceTree = "<group>"; };
+		113831B31C6A39F900E7A98A /* intersection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intersection.h; sourceTree = "<group>"; };
+		113831B41C6A39F900E7A98A /* light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = light.cpp; sourceTree = "<group>"; };
+		113831B51C6A39F900E7A98A /* light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = light.h; sourceTree = "<group>"; };
+		113831B61C6A39F900E7A98A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		113831B71C6A39F900E7A98A /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		113831B81C6A39F900E7A98A /* material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = material.cpp; sourceTree = "<group>"; };
+		113831B91C6A39F900E7A98A /* material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = material.h; sourceTree = "<group>"; };
+		113831BA1C6A39F900E7A98A /* parse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = parse.cpp; sourceTree = "<group>"; };
+		113831BB1C6A39F900E7A98A /* parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parse.h; sourceTree = "<group>"; };
+		113831BC1C6A39F900E7A98A /* perlin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perlin.cpp; sourceTree = "<group>"; };
+		113831BD1C6A39F900E7A98A /* perlin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = perlin.h; sourceTree = "<group>"; };
+		113831BE1C6A39F900E7A98A /* pointlight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pointlight.cpp; sourceTree = "<group>"; };
+		113831BF1C6A39F900E7A98A /* pointlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pointlight.h; sourceTree = "<group>"; };
+		113831C01C6A39F900E7A98A /* rayfile_render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rayfile_render.cpp; sourceTree = "<group>"; };
+		113831C11C6A39F900E7A98A /* rayfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rayfile.cpp; sourceTree = "<group>"; };
+		113831C21C6A39F900E7A98A /* rayfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rayfile.h; sourceTree = "<group>"; };
+		113831C31C6A39F900E7A98A /* rayfileinstance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rayfileinstance.cpp; sourceTree = "<group>"; };
+		113831C41C6A39F900E7A98A /* rayfileinstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rayfileinstance.h; sourceTree = "<group>"; };
+		113831C51C6A39F900E7A98A /* roots.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = roots.cpp; sourceTree = "<group>"; };
+		113831C61C6A39F900E7A98A /* roots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roots.h; sourceTree = "<group>"; };
+		113831C71C6A39F900E7A98A /* shape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shape.cpp; sourceTree = "<group>"; };
+		113831C81C6A39F900E7A98A /* shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shape.h; sourceTree = "<group>"; };
+		113831C91C6A39F900E7A98A /* shapegroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shapegroup.cpp; sourceTree = "<group>"; };
+		113831CA1C6A39F900E7A98A /* shapegroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shapegroup.h; sourceTree = "<group>"; };
+		113831CB1C6A39F900E7A98A /* sphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sphere.cpp; sourceTree = "<group>"; };
+		113831CC1C6A39F900E7A98A /* sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sphere.h; sourceTree = "<group>"; };
+		113831CD1C6A39F900E7A98A /* spotlight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spotlight.cpp; sourceTree = "<group>"; };
+		113831CE1C6A39F900E7A98A /* spotlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spotlight.h; sourceTree = "<group>"; };
+		113831CF1C6A39F900E7A98A /* torus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = torus.cpp; sourceTree = "<group>"; };
+		113831D01C6A39F900E7A98A /* torus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = torus.h; sourceTree = "<group>"; };
+		113831D11C6A39F900E7A98A /* triangle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangle.cpp; sourceTree = "<group>"; };
+		113831D21C6A39F900E7A98A /* triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangle.h; sourceTree = "<group>"; };
+		113831EC1C6A3A2B00E7A98A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		113831ED1C6A3A2B00E7A98A /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		113831EE1C6A3A2B00E7A98A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		113831931C6A39DE00E7A98A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				113831EF1C6A3A2B00E7A98A /* Cocoa.framework in Frameworks */,
+				113831F01C6A3A2B00E7A98A /* GLUT.framework in Frameworks */,
+				113831F11C6A3A2B00E7A98A /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1138318D1C6A39DE00E7A98A = {
+			isa = PBXGroup;
+			children = (
+				113831EC1C6A3A2B00E7A98A /* Cocoa.framework */,
+				113831ED1C6A3A2B00E7A98A /* GLUT.framework */,
+				113831EE1C6A3A2B00E7A98A /* OpenGL.framework */,
+				113831981C6A39DE00E7A98A /* rtSkeleton2016 */,
+				113831971C6A39DE00E7A98A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		113831971C6A39DE00E7A98A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				113831961C6A39DE00E7A98A /* rtSkeleton2016 */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		113831981C6A39DE00E7A98A /* rtSkeleton2016 */ = {
+			isa = PBXGroup;
+			children = (
+				113831A01C6A39F900E7A98A /* box.cpp */,
+				113831A11C6A39F900E7A98A /* box.h */,
+				113831A21C6A39F900E7A98A /* camera.cpp */,
+				113831A31C6A39F900E7A98A /* camera.h */,
+				113831A41C6A39F900E7A98A /* common.h */,
+				113831A51C6A39F900E7A98A /* cone.cpp */,
+				113831A61C6A39F900E7A98A /* cone.h */,
+				113831A71C6A39F900E7A98A /* control.cpp */,
+				113831A81C6A39F900E7A98A /* control.h */,
+				113831A91C6A39F900E7A98A /* cylinder.cpp */,
+				113831AA1C6A39F900E7A98A /* cylinder.h */,
+				113831AB1C6A39F900E7A98A /* directionallight.cpp */,
+				113831AC1C6A39F900E7A98A /* directionallight.h */,
+				113831AD1C6A39F900E7A98A /* geometry.cc */,
+				113831AE1C6A39F900E7A98A /* geometry.h */,
+				113831AF1C6A39F900E7A98A /* group.cpp */,
+				113831B01C6A39F900E7A98A /* group.h */,
+				113831B11C6A39F900E7A98A /* image.cpp */,
+				113831B21C6A39F900E7A98A /* image.h */,
+				113831B31C6A39F900E7A98A /* intersection.h */,
+				113831B41C6A39F900E7A98A /* light.cpp */,
+				113831B51C6A39F900E7A98A /* light.h */,
+				113831B61C6A39F900E7A98A /* main.cpp */,
+				113831B71C6A39F900E7A98A /* main.h */,
+				113831B81C6A39F900E7A98A /* material.cpp */,
+				113831B91C6A39F900E7A98A /* material.h */,
+				113831BA1C6A39F900E7A98A /* parse.cpp */,
+				113831BB1C6A39F900E7A98A /* parse.h */,
+				113831BC1C6A39F900E7A98A /* perlin.cpp */,
+				113831BD1C6A39F900E7A98A /* perlin.h */,
+				113831BE1C6A39F900E7A98A /* pointlight.cpp */,
+				113831BF1C6A39F900E7A98A /* pointlight.h */,
+				113831C01C6A39F900E7A98A /* rayfile_render.cpp */,
+				113831C11C6A39F900E7A98A /* rayfile.cpp */,
+				113831C21C6A39F900E7A98A /* rayfile.h */,
+				113831C31C6A39F900E7A98A /* rayfileinstance.cpp */,
+				113831C41C6A39F900E7A98A /* rayfileinstance.h */,
+				113831C51C6A39F900E7A98A /* roots.cpp */,
+				113831C61C6A39F900E7A98A /* roots.h */,
+				113831C71C6A39F900E7A98A /* shape.cpp */,
+				113831C81C6A39F900E7A98A /* shape.h */,
+				113831C91C6A39F900E7A98A /* shapegroup.cpp */,
+				113831CA1C6A39F900E7A98A /* shapegroup.h */,
+				113831CB1C6A39F900E7A98A /* sphere.cpp */,
+				113831CC1C6A39F900E7A98A /* sphere.h */,
+				113831CD1C6A39F900E7A98A /* spotlight.cpp */,
+				113831CE1C6A39F900E7A98A /* spotlight.h */,
+				113831CF1C6A39F900E7A98A /* torus.cpp */,
+				113831D01C6A39F900E7A98A /* torus.h */,
+				113831D11C6A39F900E7A98A /* triangle.cpp */,
+				113831D21C6A39F900E7A98A /* triangle.h */,
+			);
+			path = rtSkeleton2016;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		113831951C6A39DE00E7A98A /* rtSkeleton2016 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1138319D1C6A39DE00E7A98A /* Build configuration list for PBXNativeTarget "rtSkeleton2016" */;
+			buildPhases = (
+				113831921C6A39DE00E7A98A /* Sources */,
+				113831931C6A39DE00E7A98A /* Frameworks */,
+				113831941C6A39DE00E7A98A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = rtSkeleton2016;
+			productName = rtSkeleton2016;
+			productReference = 113831961C6A39DE00E7A98A /* rtSkeleton2016 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1138318E1C6A39DE00E7A98A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Z Sweedyk";
+				TargetAttributes = {
+					113831951C6A39DE00E7A98A = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 113831911C6A39DE00E7A98A /* Build configuration list for PBXProject "rtSkeleton2016" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 1138318D1C6A39DE00E7A98A;
+			productRefGroup = 113831971C6A39DE00E7A98A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				113831951C6A39DE00E7A98A /* rtSkeleton2016 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		113831921C6A39DE00E7A98A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				113831DE1C6A39F900E7A98A /* material.cpp in Sources */,
+				113831E41C6A39F900E7A98A /* rayfileinstance.cpp in Sources */,
+				113831D41C6A39F900E7A98A /* camera.cpp in Sources */,
+				113831EB1C6A39F900E7A98A /* triangle.cpp in Sources */,
+				113831D91C6A39F900E7A98A /* geometry.cc in Sources */,
+				113831DF1C6A39F900E7A98A /* parse.cpp in Sources */,
+				113831D61C6A39F900E7A98A /* control.cpp in Sources */,
+				113831E31C6A39F900E7A98A /* rayfile.cpp in Sources */,
+				113831D31C6A39F900E7A98A /* box.cpp in Sources */,
+				113831E71C6A39F900E7A98A /* shapegroup.cpp in Sources */,
+				113831DD1C6A39F900E7A98A /* main.cpp in Sources */,
+				113831E51C6A39F900E7A98A /* roots.cpp in Sources */,
+				113831E01C6A39F900E7A98A /* perlin.cpp in Sources */,
+				113831E81C6A39F900E7A98A /* sphere.cpp in Sources */,
+				113831D71C6A39F900E7A98A /* cylinder.cpp in Sources */,
+				113831D51C6A39F900E7A98A /* cone.cpp in Sources */,
+				113831D81C6A39F900E7A98A /* directionallight.cpp in Sources */,
+				113831E11C6A39F900E7A98A /* pointlight.cpp in Sources */,
+				113831E61C6A39F900E7A98A /* shape.cpp in Sources */,
+				113831DA1C6A39F900E7A98A /* group.cpp in Sources */,
+				113831E91C6A39F900E7A98A /* spotlight.cpp in Sources */,
+				113831DC1C6A39F900E7A98A /* light.cpp in Sources */,
+				113831E21C6A39F900E7A98A /* rayfile_render.cpp in Sources */,
+				113831DB1C6A39F900E7A98A /* image.cpp in Sources */,
+				113831EA1C6A39F900E7A98A /* torus.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1138319B1C6A39DE00E7A98A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		1138319C1C6A39DE00E7A98A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1138319E1C6A39DE00E7A98A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		1138319F1C6A39DE00E7A98A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		113831911C6A39DE00E7A98A /* Build configuration list for PBXProject "rtSkeleton2016" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1138319B1C6A39DE00E7A98A /* Debug */,
+				1138319C1C6A39DE00E7A98A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1138319D1C6A39DE00E7A98A /* Build configuration list for PBXNativeTarget "rtSkeleton2016" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1138319E1C6A39DE00E7A98A /* Debug */,
+				1138319F1C6A39DE00E7A98A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1138318E1C6A39DE00E7A98A /* Project object */;
+}
