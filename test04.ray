@@ -9,16 +9,9 @@
 #background 
 0.0 0.0 0.0 
 
-//#ambient 
-//1.0	1.0	1.0 //intensity 
-
-//#light_dir -n DirectionalLight1 --
-//1.0 1.0 1.0 //color
-//-0.9 -1.0 -0.5 //direction of light
-
 #light_point -n PointLight1 --
-1.0 1.0 1.0 //light color
-6.1 6.6 6 //light position
+2.5 2.5 2.5 //light color
+6.1 7.1 6 //light position
 1.0 0.5 0.0 //cont, linear, quad
 
 #material -n red -- 
@@ -30,14 +23,14 @@
 1.0 // refind 
 
 #material -n matteBlue -- 
-0.1	0.1	0.7	// ambient 
-0.0	0.0	0.0	// diffuse 
+0.0	0.0	0.0	// ambient 
+0.1	0.1	0.7	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 
 0.0	0.0	1.0	// kspec ktrans refind 
 
 #material -n shinyRed -- 
-0.1	0.1	0.1	// ambient 
+0.0	0.0	0.0	// ambient 
 0.8	0.1	0.1	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 

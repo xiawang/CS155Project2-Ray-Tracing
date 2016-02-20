@@ -53,15 +53,17 @@ double Triangle::intersect (Intersection& intersectionInfo)
         double gamma = (c*e.dot(w1) - a*e.dot(w2)) / (c*b - a*d);
         
         if (alpha != -1) {
-            intersectionInfo.normal = n;
-            if (n.dot(intersectionInfo.theRay.getDir()) > 0) {
-                intersectionInfo.normal = -n;
-            }
-            intersectionInfo.material = material;
-            
             if (beta >= 0 && gamma >= 0 && beta + gamma <= 1) {
+                intersectionInfo.normal = n;
+                if (n.dot(intersectionInfo.theRay.getDir()) > 0) {
+                    intersectionInfo.normal = -n;
+                }
+                intersectionInfo.material = material;
+                
                 Point3d q = intersectionInfo.theRay.getPos() + alpha*v;
                 intersectionInfo.iCoordinate = q;
+            } else {
+                alpha = -1;
             }
         }
     }

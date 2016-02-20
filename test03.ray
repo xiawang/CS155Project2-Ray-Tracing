@@ -25,14 +25,14 @@
 1.0 // refind 
 
 #material -n matteBlue -- 
-0.1	0.1	0.7	// ambient 
-0.0	0.0	0.0	// diffuse 
+0.05	0.05	0.35	// ambient 
+0.1	0.1	0.7	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 
 0.0	0.0	1.0	// kspec ktrans refind 
 
 #material -n shinyRed -- 
-0.1	0.1	0.1	// ambient 
+0.8	0.1	0.1	// ambient 
 0.8	0.1	0.1	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 

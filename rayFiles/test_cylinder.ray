@@ -13,20 +13,9 @@
 	0.0	1.0	0.0	// up
 	30.0			// heightAngle
 
-#light_point -n PointLight1 --
-	1.0	1.0	1.0	// color
-	-2.0	-2.0	2.0	// position
-	1.0	0.0	0.0	// const, linear, quad attenuation
-
-#light_point -n PointLight2 --
-	1.0	1.0	1.0	// color
-	-3.0	2.0	1.0	// position
-	1.0	0.0	0.0	// const, linear, quad attenuation
-
-#light_point -n PointLight3 --
-	1.0	1.0	1.0	// color
-	0.0	0.0	-3.0	// position
-	1.0	0.0	0.0	// const, linear, quad attenuation
+#light_dir -n DirectionalLight1 --
+1.0	1.0	1.0	// color
+1.0 1.0 1.0	// direction
 
 
 #material -n mTextured -t warning.bmp --

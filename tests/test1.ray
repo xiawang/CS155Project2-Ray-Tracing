@@ -1,0 +1,61 @@
+#version HMCCS155FALL2002
+#camera
+0.0     0.0     0.0 	// position
+0.0    	0.0	-1.0 	// facing
+0.0     1.0     0.0 	// up
+45.0                	// heightAngle
+#background
+0.0  	0.0  	0.5
+
+#light_dir -n DirectionalLight1 --
+	1.0	1.0	1.0	// color
+	-1.0	-1.0	-1.0	// direction
+
+
+#material -n red  --
+0.0     0.0     0.0 	// ambient
+1.0     0.0     0.0 	// diffuse
+0.0     0.0     0.0 	// specular
+0.0     0.0     0.0 	// emissive
+0.0     0.0         	// kspec, ktrans
+1.0 				// refind
+
+#material -n blue  --
+0.0     0.0     0.0 	// ambient
+0.0     0.0     1.0 	// diffuse
+0.0     0.0     0.0 	// specular
+0.0     0.0     0.0 	// emissive
+0.0     0.0         	// kspec, ktrans
+1.0 
+
+#material -n green  --
+0.0     0.0     0.0 	// ambient
+0.0     1.0     0.0 	// diffuse
+0.0     0.0     0.0 	// specular
+0.0     0.0     0.0 	// emissive
+0.0     0.0         	// kspec, ktrans
+1.0 
+
+#material -n purple  --
+0.0     0.0     0.0 	// ambient
+1.0     1.0     0.0 	// diffuse
+0.0     0.0     0.0 	// specular
+0.0     0.0     0.0 	// emissive
+0.0     0.0         	// kspec, ktrans
+1.0
+
+#sphere -m red --
+0.0     0.0     -10.0 	// position
+6.0                 	// radius
+#sphere -m blue --
+0.0     3.0     -8.0    // position
+4.0			      // radius
+
+#sphere -m green --
+0.0     0.0     -4.9    // position
+1.0
+
+#sphere -m green --
+0.0     0.0     5.0    // position
+1.0
+#rayfile_end

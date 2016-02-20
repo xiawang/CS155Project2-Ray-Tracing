@@ -14,7 +14,7 @@
 
 #light_dir -n DirectionalLight1 --
 1.0 1.0 1.0 //color
--0.9 0.0 -0.5 //direction of light
+-0.9 -0.4 -0.5 //direction of light
 
 #material -n red -- 
 1.0 .2 0.3	// ambient 
@@ -26,7 +26,7 @@
 
 #material -n matteBlue -- 
 0.1	0.1	0.7	// ambient 
-0.0	0.0	0.0	// diffuse 
+0.1	0.1	0.7	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 
 0.0	0.0	1.0	// kspec ktrans refind 
@@ -38,31 +38,19 @@
 0.0	0.0	0.0	// emissive 
 0.5	0.0	1.0	// kspec ktrans refind 
 
-#group_begin -n sphereplane --
-
-#group_begin -n sphere1 --
 
 #sphere -m shinyRed -- 
 0.0 6.0 0.0 // position 
 6.0 // radius
-#group_end
-
-#group_begin -n plane1 --
 
 #triangle -m matteBlue -- 
 10.0 0.0 -10.0 
 -10.0 0.0 -10.0 
 -10.0 0 10.0
-#group_end
-
-#group_begin -n plane2 --
 
 #triangle -m matteBlue -- 
 -10.0 0.0 10.0 
 10.0 0.0 10.0 
 10.0 0.0 -10.0
-#group_end
-
-#group_end
 
 #rayfile_end

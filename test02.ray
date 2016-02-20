@@ -9,9 +9,6 @@
 #background 
 0.0 0.0 0.0 
 
-//#ambient 
-//1.0	1.0	1.0 //intensity 
-
 #light_dir -n DirectionalLight1 --
 1.0 1.0 1.0 //color
 -0.9 -1.0 -0.5 //direction of light
@@ -25,8 +22,8 @@
 1.0 // refind 
 
 #material -n matteBlue -- 
-0.1	0.1	0.7	// ambient 
-0.0	0.0	0.0	// diffuse 
+0.01	0.01	0.07	// ambient 
+0.1	0.1	0.7	// diffuse 
 0.0	0.0	0.0	// specular 
 0.0	0.0	0.0	// emissive 
 0.5	0.0	1.0	// kspec ktrans refind 

@@ -43,8 +43,8 @@ double Cylinder::intersect (Intersection& info)
     Vector3d u = center - P0;
     Vector3d normal;
     
-    double z_max = center[2] + length;
-    double z_min = center[2] - length;
+    double z_max = center[2] + 0.5*length;
+    double z_min = center[2] - 0.5*length;
     double in = 1;
     
     // solve for the quadratic
@@ -55,10 +55,12 @@ double Cylinder::intersect (Intersection& info)
     qua_co[2] = sqr(P0[0]) + sqr(P0[1]) - sqr(radius);
     int res_num = solveQuadratic(qua_co, res);
     
+    cout << res[0] << "; " << res[1] << endl;
+    
     if (res_num == 1 && res[0] > 0) {
         alpha = res[0];
     } else if (res_num == 2) {
-        alpha = (res[0] > res[1])? res[0]:res[1];
+        alpha = (res[0] > 0 && res[1] <= 0)? res[0]:res[1];
     }
     
     

@@ -4,6 +4,7 @@
 #include "main.h"
 #include "common.h"
 #include "math.h"
+#include "roots.h"
 
 #define PI 3.14159
 // single glu quadric object to do opengl sphere drawing
@@ -44,27 +45,36 @@ double Sphere::intersect (Intersection& intersectionInfo)
     // Determine if intersectionInfo.theRay intersects the sphere in front of the camera
     // if so, store intersectionInfo on intersection point in intersectionInfo
     
+    Point3d P0 = intersectionInfo.theRay.getPos();
     Vector3d v = intersectionInfo.theRay.getDir();
-    Vector3d u = center - intersectionInfo.theRay.getPos();
-    double r = radius;
-    double a = (v.length() * v.length());
-    double b = -2 * u.dot(v);
-    double c = (u.length() * u.length()) - r*r;
-    double discriminant = (pow(b,2) - 4*a*c);
-    if (discriminant >= 0) {
-        if ((((-b) - sqrt(discriminant))/(2*a)) < 0) {
-            alpha = (((-b) + sqrt(discriminant))/(2*a));
-        } else {
-            alpha = (((-b) - sqrt(discriminant))/(2*a));
-        }
+    Vector3d u = center - P0;
+    
+    double coef[3];
+    coef[0] = sqr(v.length());
+    coef[1] = -2 * (u.dot(v));
+    coef[2] = sqr(u.length()) - sqr(radius);
+    double result[2];
+    double insphere = 1;
+    int resultNum = solveQuadratic(coef, result);
+    if(resultNum == 1 && result[0] > 0){
+        alpha = result[0];
         
     }
-    if (alpha != -1) {
-        Point3d q = intersectionInfo.theRay.getPos() + alpha*v;
-        intersectionInfo.iCoordinate = q;
-        Vector3d w = q - center;
-        Vector3d n = w / w.length();
-        intersectionInfo.normal = n.normalize();
+    else if(resultNum == 2){
+        if(result[0] > 0 && result[1] <= 0){
+            alpha = result[0];
+            insphere = -1;
+        }else if(result[0] <= 0 && result[1] > 0){
+            alpha = result[1];
+            insphere = -1;
+        }else if(result[0] > 0 && result[1] > 0){
+            alpha = min(result[0],result[1]);
+        }
+    }
+    if (alpha != -1){
+        intersectionInfo.iCoordinate = P0 + alpha*v;
+        Vector3d normal = insphere*(alpha * v - u);
+        intersectionInfo.normal = normal.normalize();
         intersectionInfo.material = material;
     }
     
