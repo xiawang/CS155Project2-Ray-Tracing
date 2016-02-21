@@ -40,28 +40,29 @@ double Triangle::intersect (Intersection& intersectionInfo)
     Vector3d v = intersectionInfo.theRay.getDir();
     Vector3d u = v0 - intersectionInfo.theRay.getPos();
     
-    if (n.dot(v) != 0 && n.dot(u) < 0) {
+    if (n.dot(v) != 0) {
         alpha = (n.dot(u)) / (n.dot(v));
         
-        double a = w1.dot(w1);
-        double b = w1.dot(w2);
-        double c = w1.dot(w2);
-        double d = w2.dot(w2);
-        Vector3d e = alpha*v - u;
-        
-        double beta = (d*e.dot(w1) - b*e.dot(w2)) / (a*d - c*b);
-        double gamma = (c*e.dot(w1) - a*e.dot(w2)) / (c*b - a*d);
-        
         if (alpha != -1) {
+            double a = w1.dot(w1);
+            double b = w1.dot(w2);
+            double c = w1.dot(w2);
+            double d = w2.dot(w2);
+            Vector3d e = alpha*v - u;
+            
+            double beta = (d*e.dot(w1) - b*e.dot(w2)) / (a*d - c*b);
+            double gamma = (c*e.dot(w1) - a*e.dot(w2)) / (c*b - a*d);
+            
             if (beta >= 0 && gamma >= 0 && beta + gamma <= 1) {
-                intersectionInfo.normal = n;
+                intersectionInfo.normal = n.normalize();
                 if (n.dot(intersectionInfo.theRay.getDir()) > 0) {
-                    intersectionInfo.normal = -n;
+                    intersectionInfo.normal = -(n.normalize());
                 }
-                intersectionInfo.material = material;
                 
+                intersectionInfo.material = material;
                 Point3d q = intersectionInfo.theRay.getPos() + alpha*v;
                 intersectionInfo.iCoordinate = q;
+                
             } else {
                 alpha = -1;
             }

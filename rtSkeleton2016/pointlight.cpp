@@ -26,16 +26,17 @@ Color3d PointLight::getDiffuse (Intersection& info)
    * Then factor in attenuation.
    */
     
-    Color3d theColor = Color3d(0,0,0);
-    Vector3d interSecTest = info.iCoordinate - location;
-    double distanceFromLight = interSecTest.length();
-    Vector3d rayVec = interSecTest.normalize();
-    double aten = quadAtten*sqr(distanceFromLight) + linearAtten*distanceFromLight + constAtten;
-    double maxTest = max(0.0, (info.normal).dot(-rayVec));
-    theColor = maxTest*info.material->getDiffuse(info) / aten;
-    theColor.clampTo(0, 1);
+    Color3d colord = Color3d(0,0,0);
+    Vector3d intersection = info.iCoordinate - location;
+    double intersectionDist = intersection.length();
     
-    return theColor;
+    Vector3d intersectRay = intersection.normalize();
+    double aten = quadAtten*sqr(intersectionDist) + linearAtten * intersectionDist + constAtten;
+    double maxd = max(0.0, (info.normal).dot(-intersectRay));
+    colord = maxd * info.material->getDiffuse(info) / aten;
+    colord.clampTo(0, 1);
+    
+    return colord;
   
 }
 
@@ -49,21 +50,22 @@ Color3d PointLight::getSpecular (Intersection& info)
    */
     
     Rayd ray = info.theRay;
-    Vector3d RayDir = ray.getDir();
-    RayDir = RayDir.normalize();
+    Vector3d dir = (ray.getDir()).normalize();
     Vector3d ld = info.iCoordinate - location;
     ld = ld.normalize();
     Vector3d dr = ld + 2 * ((-ld).dot(info.normal)) * info.normal;
     dr = dr.normalize();
-    double distanceFromLight = ld.length();
-    double aten = quadAtten*sqr(distanceFromLight) + linearAtten*distanceFromLight + constAtten;
-    double maxTest = max(0.0, (-RayDir).dot(dr));
-    Color3d theColor = Color3d(0,0,0);
-    double kshine = info.material -> getKshine();
-    theColor = info.material -> getSpecular() * pow(maxTest,kshine) / aten;
-    theColor.clampTo(0, 1);
     
-    return theColor;
+    double ldistance = ld.length();
+    double aten = quadAtten*sqr(ldistance) + linearAtten * ldistance + constAtten;
+    double maxs = max(0.0, (-dir).dot(dr));
+    
+    Color3d colors = Color3d(0,0,0);
+    double kshine = info.material -> getKshine();
+    colors = info.material -> getSpecular() * pow(maxs,kshine) / aten;
+    colors.clampTo(0, 1);
+    
+    return colors;
 
 	}
 
@@ -77,18 +79,20 @@ bool PointLight::getShadow (Intersection& iInfo, ShapeGroup* root)
    */
     
     Rayd theRay;
-    Vector3d interSecTest = iInfo.iCoordinate - location;
-    double distanceFromLight = interSecTest.length();
-    Vector3d rayVec = interSecTest.normalize();
-    if (rayVec.dot(iInfo.normal)>0){
+    Vector3d intersects = iInfo.iCoordinate - location;
+    double intersectionDist = intersects.length();
+    Vector3d intersectRay = intersects.normalize();
+    if (intersectRay.dot(iInfo.normal)>0){
         return true;
     }
+    
     Rayd shadowRay;
-    shadowRay.setDir(rayVec*-1);
+    shadowRay.setDir(intersectRay * (-1));
     shadowRay.setPos(iInfo.iCoordinate + iInfo.normal*EPSILON);
-    Intersection tmpInfo;
-    tmpInfo.theRay=shadowRay;
-    if (root->intersect(tmpInfo) <= distanceFromLight && root->intersect(tmpInfo) >= 0)
+    
+    Intersection shdwInfo;
+    shdwInfo.theRay=shadowRay;
+    if (root->intersect(shdwInfo) <= intersectionDist && root->intersect(shdwInfo) >= 0)
         return true;
     return false;
 
