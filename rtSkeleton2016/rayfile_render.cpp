@@ -122,8 +122,10 @@ Color3d RayFile::getColor(Rayd theRay, int rDepth)
     
     // LIGHTING TODO
     // add ambient term
+    color += intersectionInfo.material -> getAmbient() * ambient;
 
     // add emissive term
+    color += intersectionInfo.material -> getEmissive();
 
     // END LIGHTING TODO
     
@@ -152,11 +154,45 @@ Color3d RayFile::getColor(Rayd theRay, int rDepth)
         return color;
     
     // RECURSIVE TO DO
+    rDepth--;
+    
+    Vector3d normal = intersectionInfo.normal;
+    Point3d intersecLoc = intersectionInfo.iCoordinate;
+    Vector3d inDir = theRay.getDir();
+    
+    Vector3d reflectRay = (inDir + 2 * ((-inDir).dot(normal)) * normal).normalize();
     
     // reflection
+    Vector3d trans = inDir;
+    Rayd reflect;
+    reflect.setDir(reflectRay);
+    reflect.setPos(intersecLoc + normal * EPSILON);
+    
+    Color3d reflectColor = getColor(reflect, rDepth);
+    color += intersectionInfo.material -> getSpecular() * reflectColor;
+    color.clampTo(0,1);
     
     // transmission with snell's law
-
+    if(intersectionInfo.material -> getKtrans() > 0){
+        double beta = intersectionInfo.material -> getRefind();
+        double thetaIn = acos(inDir.dot(- intersectionInfo.normal));
+        
+        if(beta * sin(thetaIn) > 0 && beta*sin(thetaIn) <= 1){
+            Vector3d vs = (inDir - (cos(thetaIn))*(-1 * intersectionInfo.normal)) / (sin(thetaIn));
+            double thetaOut = asin(beta * sin(thetaIn));
+            trans = (cos(thetaOut) * (-1 * intersectionInfo.normal) + (beta * sin(thetaIn)) * (vs.normalize())).normalize();
+            
+            // set trans ray
+            Rayd transRay;
+            transRay.setDir(trans);
+            transRay.setPos(intersecLoc - normal*EPSILON);
+            
+            // set trans color
+            Color3d transColor = getColor(transRay, rDepth);
+            color += intersectionInfo.material -> getKtrans() * transColor;
+            color.clampTo(0, 1);
+        }
+    }
     
     // END RECURSIVE TODO
     

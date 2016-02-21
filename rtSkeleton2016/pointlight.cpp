@@ -25,7 +25,17 @@ Color3d PointLight::getDiffuse (Intersection& info)
    * the normal with the vector opposite the incident light's direction.
    * Then factor in attenuation.
    */
-    return Color3d(0,0,0);
+    
+    Color3d theColor = Color3d(0,0,0);
+    Vector3d interSecTest = info.iCoordinate - location;
+    double distanceFromLight = interSecTest.length();
+    Vector3d rayVec = interSecTest.normalize();
+    double aten = quadAtten*sqr(distanceFromLight) + linearAtten*distanceFromLight + constAtten;
+    double maxTest = max(0.0, (info.normal).dot(-rayVec));
+    theColor = maxTest*info.material->getDiffuse(info) / aten;
+    theColor.clampTo(0, 1);
+    
+    return theColor;
   
 }
 
@@ -37,9 +47,23 @@ Color3d PointLight::getSpecular (Intersection& info)
    * reflected ray and the ray pointing to the camera, raised to
    * some power (in this case, kshine). Then factor in attenuation.
    */
-
     
-    return   Color3d(0,0,0);
+    Rayd ray = info.theRay;
+    Vector3d RayDir = ray.getDir();
+    RayDir = RayDir.normalize();
+    Vector3d ld = info.iCoordinate - location;
+    ld = ld.normalize();
+    Vector3d dr = ld + 2 * ((-ld).dot(info.normal)) * info.normal;
+    dr = dr.normalize();
+    double distanceFromLight = ld.length();
+    double aten = quadAtten*sqr(distanceFromLight) + linearAtten*distanceFromLight + constAtten;
+    double maxTest = max(0.0, (-RayDir).dot(dr));
+    Color3d theColor = Color3d(0,0,0);
+    double kshine = info.material -> getKshine();
+    theColor = info.material -> getSpecular() * pow(maxTest,kshine) / aten;
+    theColor.clampTo(0, 1);
+    
+    return theColor;
 
 	}
 
@@ -52,7 +76,20 @@ bool PointLight::getShadow (Intersection& iInfo, ShapeGroup* root)
    * and see if it intersects anything. 
    */
     
-
+    Rayd theRay;
+    Vector3d interSecTest = iInfo.iCoordinate - location;
+    double distanceFromLight = interSecTest.length();
+    Vector3d rayVec = interSecTest.normalize();
+    if (rayVec.dot(iInfo.normal)>0){
+        return true;
+    }
+    Rayd shadowRay;
+    shadowRay.setDir(rayVec*-1);
+    shadowRay.setPos(iInfo.iCoordinate + iInfo.normal*EPSILON);
+    Intersection tmpInfo;
+    tmpInfo.theRay=shadowRay;
+    if (root->intersect(tmpInfo) <= distanceFromLight && root->intersect(tmpInfo) >= 0)
+        return true;
     return false;
 
 }
