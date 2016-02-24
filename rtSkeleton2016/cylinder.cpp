@@ -55,8 +55,6 @@ double Cylinder::intersect (Intersection& info)
     qua_co[2] = sqr(P0[0]) + sqr(P0[1]) - sqr(radius);
     int res_num = solveQuadratic(qua_co, res);
     
-    cout << res[0] << "; " << res[1] << endl;
-    
     if (res_num == 1 && res[0] > 0) {
         alpha = res[0];
     } else if (res_num == 2) {
