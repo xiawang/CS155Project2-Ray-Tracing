@@ -51,6 +51,17 @@ void RayFile::raytrace (Image* image)
     
     // for printing progress to stderr...
     double nextMilestone = 1.0;
+    double fisheyeR = D*0.95;
+    
+    for (int j = 0; j < imageHeight; ++j)
+    {
+        for (int i = 0; i<imageWidth; ++i)
+        {
+            image->setPixel(i, j, 0, 0);
+            image->setPixel(i, j, 1, 0);
+            image->setPixel(i, j, 2, 0);
+        }
+    }
     
     //
     // ray trace the scene
@@ -64,34 +75,62 @@ void RayFile::raytrace (Image* image)
             
             // Compute the ray to trace
             Rayd theRay;
+            Color3d theColor;
             
             // Compute and set the starting poisition and direction of the ray through pixel i,j
             // HINT: be sure to normalize the direction vector
             
             Point3d C_ij = top_left + (i + 0.5) * right - (j + 0.5) * up;
             Vector3d dir_ij = C_ij - pos;
+            double len_ij = dir_ij.length();
             Vector3d norm_ij = dir_ij.normalize();
             
             theRay.setPos(pos);
             theRay.setDir(norm_ij);
             
+            // fisheye begin
+            int tx = i;
+            int ty = j;
+            Point3d fisheyeOrigin = pos + fisheyeR * norm_ij;
+            
+            theColor = getColor(theRay, options->recursiveDepth);
+            double proportion = 1 - fisheyeR / len_ij;
+            double imageXOffset = -1 *(i - imageWidth/2) * proportion;
+            double imageYOffset = -1 * (j - imageHeight/2) * proportion;
+            double precisei = i + imageXOffset;
+            double precisej = j + imageYOffset;
+            int newi = floor(precisei+0.5);
+            int newj = floor(precisej+0.5);
+            tx = newi;
+            ty = newj;
+            Pixel newij = image->getPixel(newi, newj);
+            if(newij.r != 0 || newij.g != 0 || newij.b != 0){
+                double newr = (newij.r + theColor[0])/2;
+                double newg = (newij.g + theColor[1])/2;
+                double newb = (newij.b + theColor[2])/2;
+                theColor = Color3d(newr,newg,newb);
+                theColor.clampTo(0.0, 1.0);
+            }
+            //fisheye end
+            
             // get the color at the closest intersection point
-            Color3d theColor = getColor(theRay, options->recursiveDepth);
+//            theColor = getColor(theRay, options->recursiveDepth);
             
             int jitter = options->jitter;
-            double apertureR = 0.05;
-            double AAshaftR = 0.01;
+            double apt = 0.05;
+            double shft = 0.01;
+            double k = 1000.0;
             
             if(jitter > 0){
                 Point3d focalPoint = pos + focalDist*norm_ij;
                 int numRays = 0;
                 
                 while(numRays < jitter){
-                    double aaDistx = (double)(arc4random_uniform(2 * AAshaftR * 1000 + 1))/1000.0;
-                    aaDistx = aaDistx - AAshaftR;
-                    double aayBound = sqrt(sqr(AAshaftR) - sqr(aaDistx));
-                    double aaDisty = (double)(arc4random_uniform(2 * aayBound * 1000 + 1))/1000.0;
-                    aaDisty = aaDisty - aayBound;
+                    double aaDistx = (double)(arc4random_uniform(2 * shft * k + 1))/k;
+                    aaDistx = aaDistx - shft;
+                    double bound = sqrt(sqr(shft) - sqr(aaDistx));
+                    double aaDisty = (double)(arc4random_uniform(2 * bound * k + 1))/k;
+                    aaDisty = aaDisty - bound;
                     Rayd aaRay;
                     Point3d aaOffset(aaDistx,aaDisty);
                     Point3d aaRayOrigin = pos + aaOffset;
@@ -107,10 +146,10 @@ void RayFile::raytrace (Image* image)
                 numRays = 0;
                 
                 while(numRays < jitter){
-                    double randDistx = (double)(arc4random_uniform(2 * apertureR * 1000 + 1))/1000.0;
-                    randDistx = randDistx - apertureR;
-                    double yBound = sqrt(sqr(apertureR) - sqr(randDistx));
-                    double randDisty = (double)(arc4random_uniform(2 * yBound * 1000 + 1))/1000.0;
+                    double randDistx = (double)(arc4random_uniform(2 * apt * k + 1))/k;
+                    randDistx = randDistx - apt;
+                    double yBound = sqrt(sqr(apt) - sqr(randDistx));
+                    double randDisty = (double)(arc4random_uniform(2 * yBound * k + 1))/k;
                     randDisty = randDisty - yBound;
                     Rayd jitterRay;
                     Point3d jitterRayOffset(randDistx,randDisty,0);
@@ -138,7 +177,7 @@ void RayFile::raytrace (Image* image)
             p.b = clamp(theColor[2],0,1);
             
             
-            image->setPixel_(i, j, p);
+            image->setPixel_(tx, ty, p);
             
         } // end for-i
         
