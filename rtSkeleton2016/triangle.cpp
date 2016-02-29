@@ -63,6 +63,49 @@ double Triangle::intersect (Intersection& intersectionInfo)
                 Point3d q = intersectionInfo.theRay.getPos() + alpha*v;
                 intersectionInfo.iCoordinate = q;
                 
+                if(textured){
+                    TexCoord2d newW1 = t[1] - t[0];
+                    TexCoord2d newW2 = t[2] - t[0];
+                    TexCoord2d tex = t[0] + beta * newW1 + gamma * newW2;
+                    if(tex[0]>=0){
+                        tex[0] = tex[0] - floor(tex[0]);
+                    }else{
+                        tex[0] = ceil(-tex[0]) + tex[0];
+                    }
+                    if(tex[1]>=0){
+                        tex[1] = tex[1] - floor(tex[1]);
+                    }else{
+                        tex[1] = ceil(-tex[1]) + tex[1];
+                    }
+                    intersectionInfo.texCoordinate = tex;
+                }
+                
+                if(bumpMapped){
+                    TexCoord2d newW1 = t[1] - t[0];
+                    TexCoord2d newW2 = t[2] - t[0];
+                    TexCoord2d tex = t[0] + beta * newW1 + gamma * newW2;
+                    if(tex[0]>=0){
+                        tex[0] = tex[0] - floor(tex[0]);
+                    }else{
+                        tex[0] = ceil(-tex[0]) + tex[0];
+                    }
+                    if(tex[1]>=0){
+                        tex[1] = tex[1] - floor(tex[1]);
+                    }else{
+                        tex[1] = ceil(-tex[1]) + tex[1];
+                    }
+                    intersectionInfo.texCoordinate = tex;
+                    Vector3d zoz(0,1,0);
+                    Vector3d normal = n;
+                    if(normal[0] != 0 || normal[1] != 1 || normal[2] != 0){
+                        Vector3d up = zoz - normal.dot(zoz)*normal;
+                        up.normalize();
+                        Vector3d right = normal.cross(up);
+                        right.normalize();
+                        intersectionInfo.material->bumpNormal(normal, up, right, intersectionInfo, bumpScale);
+                    }
+                }
+                
             } else {
                 alpha = -1;
             }

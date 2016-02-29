@@ -76,6 +76,39 @@ double Sphere::intersect (Intersection& intersectionInfo)
         Vector3d normal = insphere*(alpha * v - u);
         intersectionInfo.normal = normal.normalize();
         intersectionInfo.material = material;
+        
+        if(textured){
+            Point3d xyz;
+            xyz = intersectionInfo.iCoordinate - center;
+            double theta, phi;
+            phi = asin(xyz[1] / radius);
+            theta = atan2(xyz[2],xyz[0]);
+            phi = phi / PI + 0.5;
+            theta = theta / (2 * PI) + 0.5;
+            intersectionInfo.texCoordinate[0] = theta;
+            intersectionInfo.texCoordinate[1] = phi;
+        }
+        
+        if(bumpMapped){
+            Point3d xyz;
+            xyz = intersectionInfo.iCoordinate - center;
+            double theta, phi;
+            phi = asin(xyz[2] / radius);
+            theta = atan2(xyz[1],xyz[0]);
+            phi = phi / PI + 0.5;
+            theta = theta / (2 * PI) + 0.5;
+            intersectionInfo.texCoordinate[0] = theta;
+            intersectionInfo.texCoordinate[1] = phi;
+            Vector3d zoz(0,1,0);
+            normal = intersectionInfo.normal;
+            if(normal[0] != 0 || normal[1] != 1 || normal[2] != 0){
+                Vector3d up = zoz - normal.dot(zoz)*normal;
+                up.normalize();
+                Vector3d right = normal.cross(up);
+                right.normalize();
+                intersectionInfo.material->bumpNormal(normal, up, right, intersectionInfo, bumpScale);
+            }
+        }
     }
     
     // RAY_CASTING TODO (sphere intersection)

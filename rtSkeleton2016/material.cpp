@@ -68,7 +68,47 @@ bool Material::procTextured()
 const Color3d Material::getTexture(double u, double v)
 {
 
-    return Color3d(0,0,0);
+    Image* src = texture;
+    u = u * (src->getWidth() - 1);
+    v = v * (src->getHeight() - 1);
+    
+    int lowerU = floor(u);
+    int lowerV = floor(v);
+    int upperU = ceil(u);
+    int upperV = ceil(v);
+    double upperWeightx = (u - lowerU)/(upperU - lowerU);
+    double upperWeighty = (v - lowerV)/(upperV - lowerV);
+    
+    double ULR,ULG,ULB,URR,URG,URB,LLR,LLG,LLB,LRR,LRG,LRB;
+    ULR = src -> getPixel(lowerU, lowerV, 0);
+    ULG = src -> getPixel(lowerU, lowerV, 1);
+    ULB = src -> getPixel(lowerU, lowerV, 2);
+    URR = src -> getPixel(upperU, lowerV, 0);
+    URG = src -> getPixel(upperU, lowerV, 1);
+    URB = src -> getPixel(upperU, lowerV, 2);
+    LLR = src -> getPixel(lowerU, upperV, 0);
+    LLG = src -> getPixel(lowerU, upperV, 1);
+    LLB = src -> getPixel(lowerU, upperV, 2);
+    LRR = src -> getPixel(upperU, upperV, 0);
+    LRG = src -> getPixel(upperU, upperV, 1);
+    LRB = src -> getPixel(upperU, upperV, 2);
+    
+    double RmiddleU, GmiddleU, BmiddleU, RmiddleB, GmiddleB, BmiddleB;
+    RmiddleU = ULR*(1 - upperWeightx) + URR * upperWeightx;
+    GmiddleU = ULG*(1 - upperWeightx) + URG * upperWeightx;
+    BmiddleU = ULB*(1 - upperWeightx) + URB * upperWeightx;
+    RmiddleB = LLR*(1 - upperWeightx) + LRR * upperWeightx;
+    GmiddleB = LLG*(1 - upperWeightx) + LRG * upperWeightx;
+    BmiddleB = LLB*(1 - upperWeightx) + LRB * upperWeightx;
+    
+    double fR, fG, fB;
+    fR = RmiddleU * (1 - upperWeighty) + RmiddleB * upperWeighty;
+    fG = GmiddleU * (1 - upperWeighty) + GmiddleB * upperWeighty;
+    fB = BmiddleU * (1 - upperWeighty) + BmiddleB * upperWeighty;
+    
+    Color3d myColor(fR,fG,fB);
+    myColor.clampTo(0.0, 1.0);
+    return myColor;
 
 }
 const Color3d Material::getProceduralTexture(Point3d point)

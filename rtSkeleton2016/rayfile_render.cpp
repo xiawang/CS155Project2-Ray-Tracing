@@ -31,9 +31,19 @@ void RayFile::raytrace (Image* image)
     Vector3d up = camera->getUp();
     Vector3d right = camera->getRight();
     double half_angle = camera->getHalfHeightAngle();
-    
     double rad = M_PI / 180 * half_angle;
     double D = imageHeight / (tan(rad)*2);
+    
+    Rayd DofRay;
+    DofRay.setPos(pos);
+    DofRay.setDir(dir);
+    double focalDist;
+    Intersection DofInfo;
+    DofInfo.theRay = DofRay;
+    focalDist = root -> intersect(DofInfo);
+    if(focalDist == -1){
+        focalDist = 2 * D;
+    }
     
     Point3d center = pos + dir*D;
     Point3d top_left = center + (imageHeight / 2) * up - (imageWidth / 2) * right;
@@ -67,6 +77,57 @@ void RayFile::raytrace (Image* image)
             
             // get the color at the closest intersection point
             Color3d theColor = getColor(theRay, options->recursiveDepth);
+            
+            int jitter = options->jitter;
+            double apertureR = 0.05;
+            double AAshaftR = 0.01;
+            
+            if(jitter > 0){
+                Point3d focalPoint = pos + focalDist*norm_ij;
+                int numRays = 0;
+                
+                while(numRays < jitter){
+                    double aaDistx = (double)(arc4random_uniform(2 * AAshaftR * 1000 + 1))/1000.0;
+                    aaDistx = aaDistx - AAshaftR;
+                    double aayBound = sqrt(sqr(AAshaftR) - sqr(aaDistx));
+                    double aaDisty = (double)(arc4random_uniform(2 * aayBound * 1000 + 1))/1000.0;
+                    aaDisty = aaDisty - aayBound;
+                    Rayd aaRay;
+                    Point3d aaOffset(aaDistx,aaDisty);
+                    Point3d aaRayOrigin = pos + aaOffset;
+                    aaRay.setPos(aaRayOrigin);
+                    aaRay.setDir(norm_ij);
+                    theColor += getColor(aaRay, options->recursiveDepth);
+                    numRays++;
+                }
+                theColor[0] = theColor[0] / (jitter+1);
+                theColor[1] = theColor[1] / (jitter+1);
+                theColor[2] = theColor[2] / (jitter+1);
+                theColor.clampTo(0.0, 1.0);
+                numRays = 0;
+                
+                while(numRays < jitter){
+                    double randDistx = (double)(arc4random_uniform(2 * apertureR * 1000 + 1))/1000.0;
+                    randDistx = randDistx - apertureR;
+                    double yBound = sqrt(sqr(apertureR) - sqr(randDistx));
+                    double randDisty = (double)(arc4random_uniform(2 * yBound * 1000 + 1))/1000.0;
+                    randDisty = randDisty - yBound;
+                    Rayd jitterRay;
+                    Point3d jitterRayOffset(randDistx,randDisty,0);
+                    Point3d jitterRayOrigin = pos + jitterRayOffset;
+                    Vector3d rayDir = focalPoint - jitterRayOrigin;
+                    rayDir.normalize();
+                    jitterRay.setPos(jitterRayOrigin);
+                    jitterRay.setDir(rayDir);
+                    theColor += getColor(jitterRay, options->recursiveDepth);
+                    numRays++;
+                }
+                theColor[0] = theColor[0] / (jitter+1);
+                theColor[1] = theColor[1] / (jitter+1);
+                theColor[2] = theColor[2] / (jitter+1);
+                theColor.clampTo(0.0, 1.0);
+                
+            }
             
             // the image class doesn't know about color3d so we have to convert to pixel
             // update pixel
