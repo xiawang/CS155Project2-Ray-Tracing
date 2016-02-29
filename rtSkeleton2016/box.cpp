@@ -79,6 +79,47 @@ double Box::intersect (Intersection& info)
         }
     }
     
+    if(alpha != -1){
+        if(textured){
+            TexCoord2d tex = getTexCoordinates(info.iCoordinate);
+            if(tex[0]>=0){
+                tex[0] = tex[0] - floor(tex[0]);
+            }else{
+                tex[0] = ceil(-tex[0]) + tex[0];
+            }
+            if(tex[1]>=0){
+                tex[1] = tex[1] - floor(tex[1]);
+            }else{
+                tex[1] = ceil(-tex[1]) + tex[1];
+            }
+            info.texCoordinate = tex;
+        }
+        
+        if(bumpMapped){
+            TexCoord2d tex = getTexCoordinates(info.iCoordinate);
+            if(tex[0]>=0){
+                tex[0] = tex[0] - floor(tex[0]);
+            }else{
+                tex[0] = ceil(-tex[0]) + tex[0];
+            }
+            if(tex[1]>=0){
+                tex[1] = tex[1] - floor(tex[1]);
+            }else{
+                tex[1] = ceil(-tex[1]) + tex[1];
+            }
+            info.texCoordinate = tex;
+            Vector3d zoz(0,1,0);
+            Vector3d normal = info.normal.normalize();
+            if(normal[0] != 0 || normal[1] != 1 || normal[2] != 0){
+                Vector3d up = zoz - normal.dot(zoz)*normal;
+                up.normalize();
+                Vector3d right = normal.cross(up);
+                right.normalize();
+                info.material->bumpNormal(normal, up, right, info, bumpScale);
+            }
+        }
+    }
+    
 	return alpha;
 }
 
@@ -86,9 +127,23 @@ double Box::intersect (Intersection& info)
 TexCoord2d Box::getTexCoordinates (Point3d i)
 {
 
-	TexCoord2d tCoord(0.0, 0.0);
-
-	return tCoord;
+    TexCoord2d tCoord;
+    if(i[1] - center[1] == size[1]/2){
+        tCoord = TexCoord2d(i[0], i[2]);
+    }else if(i[1] - center[1] == -size[1]/2){
+        tCoord = TexCoord2d(i[0],-i[2]+size[1]+2*size[2]);
+    }else if(i[2] - center[2] == size[2]/2){
+        tCoord = TexCoord2d(i[0], i[1]+size[2]);
+    }else if(i[2] - center[2] == -size[2]/2){
+        tCoord = TexCoord2d(i[0]+size[0]+size[2], i[1]+size[2]);
+    }else if(i[0] - center[0] == size[0]/2){
+        tCoord = TexCoord2d(i[2]+size[0],i[1]+size[2]);
+    }else{
+        tCoord = TexCoord2d(i[2]+size[2]+2*size[0],i[1]+size[2]);
+    }
+    tCoord = 0.2 * tCoord;
+    
+    return tCoord;
 }
 
 

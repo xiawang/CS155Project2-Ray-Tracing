@@ -67,6 +67,7 @@ double Group::intersect (Intersection& intersectionInfo)
             localInfo.normal = tempInfo.normal;
             localInfo.material = tempInfo.material;
             localInfo.iCoordinate = tempInfo.iCoordinate;
+            localInfo.texCoordinate = tempInfo.texCoordinate;
 		}
         // RAY_CASTING TODO (Intersection)
 	}
@@ -86,6 +87,7 @@ double Group::intersect (Intersection& intersectionInfo)
         intersectionInfo.iCoordinate = transform.multPos(localInfo.iCoordinate);
         Vector3d n_distance = intersectionInfo.iCoordinate - intersectionInfo.theRay.getPos();
         alpha = n_distance.length();
+        intersectionInfo.texCoordinate = localInfo.texCoordinate;
     }
     // RAY_CASTING TODO (sphere/triangle intersection and transformation)
 

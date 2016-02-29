@@ -130,8 +130,23 @@ void Material::bumpNormal (Vector3d& normal,
 
 	if (bumpMap != NULL)
 	{
-
-
+        double x = info.texCoordinate[0];
+        double y = info.texCoordinate[1];
+        Image* src = bumpMap;
+        x = x * (src->getWidth() - 1);
+        y = y * (src->getHeight() - 1);
+        Pixel a = bumpMap->getPixel(floor(x), y);
+        int b1 = (int)ceil(x) % (int)(src->getWidth());
+        Pixel b = bumpMap->getPixel(b1, y);
+        Pixel c = bumpMap->getPixel(x,floor(y));
+        int d2 = (int)ceil(y) % (int)(src->getHeight());
+        Pixel d = bumpMap->getPixel(x,d2);
+        double dx = a.r - b.r;
+        double dy = c.r - d.r;
+        Vector3d perturbation = dx * right + dy * up;
+        perturbation = perturbation * bumpScale + normal;
+        perturbation.normalize();
+        info.normal = perturbation;
 	}
 	return;
 }
