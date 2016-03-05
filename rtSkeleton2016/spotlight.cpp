@@ -6,6 +6,8 @@
 #include "main.h"
 #include <stdlib.h>
 
+#define PI 3.14159
+
 
 SpotLight::SpotLight ()
 : Light ()
@@ -25,13 +27,29 @@ Color3d SpotLight::getDiffuse (Intersection& iInfo)
    * the normal with the vector opposite the incident light's direction.
    * Then factor in attenuation and the spotlight effect.
    */
-    /*
-     * Intensity of diffuse lighting is equal to the dot product of
-     * the normal with the vector opposite the incident light's direction.
-     * Then factor in attenuation and the spotlight effect.
-     */
     
-    return Color3d(0,0,0);
+    Color3d colord = Color3d(0,0,0);
+    Vector3d intersection = iInfo.iCoordinate - location;
+    double intersectionDist = intersection.length();
+    
+    Vector3d intersectRay = intersection.normalize();
+    double aten = quadAtten*sqr(intersectionDist) + linearAtten * intersectionDist + constAtten;
+    double maxd = max(0.0, (iInfo.normal).dot(-intersectRay));
+    colord = maxd * iInfo.material->getDiffuse(iInfo) / aten;
+    
+    double cosangle = 0;
+    cosangle = beamCenter.dot(intersectRay) / (beamCenter.length() * intersectRay.length());
+    double angle = acos(cosangle) * 180.0 / PI;
+    double SP = 0;
+    if (angle > cutOffAngle * 180.0 / PI) {
+        SP = 0;
+    } else {
+        SP = pow(max(0.0, intersectRay.dot(beamCenter)),128*dropOffRate);
+    }
+    colord = colord * SP;
+    colord.clampTo(0, 1);
+    
+    return colord;
 
 
 }
@@ -46,9 +64,35 @@ Color3d SpotLight::getSpecular (Intersection& iInfo)
    * some power (in this case, kshine). Then factor in attenuation and 
    * the spotlight effect.
    */
-
-        
-        return Color3d(0,0,0);
+    
+    Rayd ray = iInfo.theRay;
+    Vector3d dir = (ray.getDir()).normalize();
+    Vector3d ld = iInfo.iCoordinate - location;
+    ld = ld.normalize();
+    Vector3d dr = ld + 2 * ((-ld).dot(iInfo.normal)) * iInfo.normal;
+    dr = dr.normalize();
+    
+    double ldistance = ld.length();
+    double aten = quadAtten*sqr(ldistance) + linearAtten * ldistance + constAtten;
+    double maxs = max(0.0, (-dir).dot(dr));
+    
+    Color3d colord = Color3d(0,0,0);
+    double kshine = iInfo.material -> getKshine();
+    colord = iInfo.material -> getSpecular() * pow(maxs,kshine) / aten;
+    
+    double cosangle = 0;
+    cosangle = beamCenter.dot(ld) / (beamCenter.length() * ld.length());
+    double angle = acos(cosangle) * 180.0 / PI;
+    double SP = 0;
+    if (angle > cutOffAngle * 180.0 / PI) {
+        SP = 0;
+    } else {
+        SP = pow(max(0.0, ld.dot(beamCenter)),128*dropOffRate);
+    }
+    colord = colord * SP;
+    colord.clampTo(0, 1);
+    
+    return colord;
     
 }
 
@@ -61,7 +105,22 @@ bool SpotLight::getShadow (Intersection& iInfo, ShapeGroup* root)
    * and see if it intersects anything.
    */
  
-
+    Rayd theRay;
+    Vector3d intersects = iInfo.iCoordinate - location;
+    double intersectionDist = intersects.length();
+    Vector3d intersectRay = intersects.normalize();
+    if (intersectRay.dot(iInfo.normal)>0){
+        return true;
+    }
+    
+    Rayd shadowRay;
+    shadowRay.setDir(intersectRay * (-1));
+    shadowRay.setPos(iInfo.iCoordinate + iInfo.normal*EPSILON);
+    
+    Intersection shdwInfo;
+    shdwInfo.theRay=shadowRay;
+    if (root->intersect(shdwInfo) <= intersectionDist && root->intersect(shdwInfo) >= 0)
+        return true;
     return false;
  
 }

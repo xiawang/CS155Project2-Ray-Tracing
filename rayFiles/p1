@@ -1,0 +1,144 @@
+#version HMCCS155FALL2002
+
+/*
+ * two point lights on sphere and triangle.  should see specular 
+ * highlight on sphere, but not triangle.  both should be mostly lit.
+ * 
+ */
+
+#background	0.95 1.0 1.0
+#ambient	0.5 0.5 0.5
+
+#camera
+	0.0	-0.5	1.0	// position
+	0.0	0.0	-1.0	// facing
+	0.0	1.0	0.0	// up
+	30.0			// heightAngle
+
+//#ambient
+//1.0 1.0 1.0 //color
+
+#light_dir -n DirectionalLight1 --
+	1.0	1.0	0.9	// color
+	-1.0	-1.0	-1.0	// direction
+
+//#light_point -n PointLight1 --
+//	1.0	1.0	1.0	// color
+//	0.5 3.0	-3.0	// position
+//	1.0	0.5	0.2 	// attenuation
+
+#material -n mMatteBlue --
+	0.0	0.0	0.0	// ambient
+	0.1	0.1	0.8	// diffuse
+	0.0	0.0	0.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.0	0.0	1.0	// kspec ktrans refind
+
+#material -n mWhite --
+	0.5	0.5	0.5	// ambient
+	0.8	0.8	0.8	// diffuse
+	0.1	0.1	0.1	// specular
+	0.1	0.1	0.1	// emissive
+	0.1	0.0	1.0	// kspec ktrans refind
+
+#material -n mShinyRed --
+	1.0	0.0	0.0	// ambient
+	1.0	0.0	0.0	// diffuse
+	0.3	0.3	0.3	// specular
+	0.0	0.0	0.0	// emissive
+	0.2	0.0	1.0	// kspec ktrans refind
+
+#material -n mShinyPink --
+	1.0	0.0	0.4	// ambient
+	1.0	0.0	0.4	// diffuse
+	0.2	0.2	0.2	// specular
+	0.0	0.0	0.0	// emissive
+	0.2	0.0	1.0	// kspec ktrans refind
+
+#material -n mShinyPink2 --
+	0.8	0.5 0.5	// ambient
+	0.8	0.5	0.5	// diffuse
+	0.2	0.2	0.2	// specular
+	0.0	0.0	0.0	// emissive
+	0.2	0.0	1.0	// kspec ktrans refind
+
+#material -n mShinyBlue --
+	0.5	0.9	1.0	// ambient
+	0.0	0.0	1.0	// diffuse
+	0.3	0.3	0.3	// specular
+	0.0	0.0	0.0	// emissive
+	0.2	0.0	1.0	// kspec ktrans refind
+
+#material -n mShinyYellow --
+	0.5 0.4	0.0	// ambient
+	0.8	0.6	0.5	// diffuse
+	0.4	0.4	0.4	// specular
+	0.0	0.0	0.0	// emissive
+	0.2	0.0	1.0	// kspec ktrans refind
+
+#sphere -n Sphere1 -m mWhite --
+	0.0	0.0	-5.0	// position
+	1.0			// radius
+
+//#sphere -n Sphere2 -m mShinyBlue --
+//	-0.3 -0.85 -0.6
+//	0.15
+
+#sphere -n Sphere3 -m mShinyPink2 --
+	-2.0 0.0 -3.0
+	1.0
+
+#sphere -n Sphere4 -m mShinyPink --
+	0.2 -0.8 -3.0
+	0.2
+
+#sphere -n Sphere5 -m mShinyYellow --
+	-0.5 -0.5 -2.0
+	0.5
+
+#sphere -n Sphere5 -m mShinyPink2 --
+	0.4  -0.7 -1.5
+	0.3
+
+#triangle -n Triangle1 -m mWhite --
+	5.0	-1.0	2.0	 // v0
+	-4.0	-1.0	2.0 // v1
+	5.0 -1.0	-10.0	 // v2
+#triangle -n Triangle2 -m mWhite --
+	-4.0	-1.0	-10.0	 // v0
+	5.0		-1.0	-10.0 // v1
+	-4.0    -1.0	2.0	 // v2 
+
+#triangle -n Triangle3 -m mWhite --
+	-4.0	5.0	-10.0	 // v0
+	-4.0	-1.0	-10.0 // v1
+	-4.0    -1.0	2.0	 // v2 
+
+#triangle -n Triangle4 -m mWhite --
+	-4.0	-1.0	2.0	 // v0
+	-4.0	5.0	2.0 // v1
+	-4.0    5.0	-10.0	 // v2
+
+#triangle -n Triangle5 -m mWhite --
+	-4.0	-1.0	-10.0	 // v0
+	5.0	    -1.0	-10.0 // v1
+	-4.0    5.0	-10.0	 // v2 
+
+#triangle -n Triangle5 -m mWhite --
+	-4.0	5.0	-10.0	 // v0
+	5.0	    5.0	-10.0 // v1
+	5.0    -1.0	-10.0	 // v2 
+
+//#triangle -n Triangle6 -m mWhite --
+//	5.0	    5.0	-10.0	 // v0
+//	5.0	    -1.0	-10.0 // v1
+//	5.0     -1.0	2.0	 // v2 
+
+//#triangle -n Triangle7 -m mWhite --
+//	5.0	    -1.0	2.0	 // v0
+//	5.0	    5.0	2.0 // v1
+//	5.0     5.0	-10.0	 // v2
+
+
+
+#rayfile_end

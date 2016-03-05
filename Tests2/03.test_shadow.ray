@@ -1,0 +1,76 @@
+#version HMCCS155FALL2002
+
+/*
+ * common shadow bug test - shadow testing casts a ray from the 
+ * intersection point to the light and intersects it with the scene.
+ * if they're careless, they'll count intersections that happen beyond
+ * the light as casting a shadow and shadows will appear where they
+ * shouldn't be.  in this case, there should be a white circle of
+ * light from the spotlight, as well as the light from a pointlight.
+ * both should be unobstructed.  if any shadows are present, they
+ * have the bug.
+ */
+
+#background   0.0  0.0  0.0
+#ambient      0.4  0.4  0.4
+
+#camera
+	    9.0     2.0     2.5   // position
+	   -1.0     0.0     0.0   // direction
+	    0.0     1.0     0.0   // up
+	    30.0                  // heightAngle
+
+
+#light_point -n pointLight --
+	    1.0     1.0     1.0   // color
+	    6.0     1.0     1.0   // position
+	    1.0     0.0     0.0   // attenuation
+
+
+#light_point -n pointLight --
+	    0.8     0.9     0.8   // color
+	    6.0     2.5     2.4   // position
+	    1.0     0.0     0.0   // attenuation
+
+
+
+#material -n plainRed --
+	    0.2     0.0     0.0   // ambient
+	    0.9     0.2     0.3   // diffuse
+	    0.1     0.1     0.1   // specular
+	    0.0     0.0     0.0   // emissive
+	    0.9     0.0           // kspec    ktrans
+	    1.0                   // refind
+
+#material -n plainGray --
+	    0.1     0.1     0.1   // ambient
+	    0.7     0.7     0.7   // diffuse
+	    0.1     0.1     0.1   // specular
+	    0.0     0.0     0.0   // emissive
+	    0.9     0.0           // kspec    ktrans
+	    1.0                   // refind
+
+
+#triangle -n backTriangle -m plainGray -t --
+	    4.0    -5.0    -6.0   // vertex 1
+	    0.0     0.0           // texcoord 1
+
+	    4.0    10.0     4.0   // vertex 2
+	    0.0     1.0           // texcoord 2
+
+	    4.0    -5.0    14.0   // vertex 3
+	    1.0     0.0           // texcoord 3
+
+
+#triangle -n frontTriangle -m plainRed -t --
+	   10.0    -5.0    -2.0   // vertex 1
+	    0.0     0.0           // texcoord 1
+
+	   10.0    10.0     8.0   // vertex 2
+	    0.0     1.0           // texcoord 2
+
+	   10.0    -5.0    18.0   // vertex 3
+	    1.0     0.0           // texcoord 3
+
+
+#rayfile_end

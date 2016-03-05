@@ -1,0 +1,39 @@
+#version HMCCS155FALL2002
+
+/*
+ * attenuation test, with a spotlight and a pointlight.  the scene 
+ * should be dark, black in all four corners.
+ */
+
+#background	0.0 0.0 0.0
+#ambient	0.0 0.0 0.0
+
+#camera
+	-3.0	0.0	0.0	// position
+	1.0	0.0	0.0	// facing
+	0.0	1.0	0.0	// up
+	30.0			// heightAngle
+
+#light_point -n PointLight1 --
+	1.0	1.0	1.0	// color
+	1.0	1.0	1.0	// position
+	1.0	0.5	0.5	// const, linear, quad atten
+
+#light_point -n PointLight2 --
+	1.0	1.0	1.0	// color
+	1.0	0.0	-4.0	// position
+	1.0	0.5	0.5	// const, linear, quad attens
+
+#material -n mSimple --
+	0.1	0.6	0.3	// ambient
+	0.1	0.6	0.3	// diffuse
+	1.0	1.0	1.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.9	0.0	1.0	// kspec ktrans refind
+
+#triangle -n Triangle1 -m mSimple --
+	2.0	0.0	-8.0	// v0
+	2.0	-10.0	7.0	// v1
+	2.0	10.0	7.0	// v2
+
+#rayfile_end

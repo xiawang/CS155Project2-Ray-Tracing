@@ -1,0 +1,90 @@
+/*
+ * A simple ray file for testing all lights and the triangle and sphere 
+ * primitives.  Run with recursive depth=3.
+ */
+
+#version HMCCS155FALL2002
+
+#background	0.0 0.0 0.0
+#ambient	0.5 0.5 0.5
+
+#camera
+         0.0   0.0   10.0   // position
+         0.0   0.0   -1.0   // facing
+	 0.0   1.0   0.0    // up
+	 30.0               // heightAngle
+
+#light_dir -n DirectionalLight1 --
+	0.1	0.1	0.2	// color
+	0.0	0.707	-0.707	// direction
+
+#light_point -n PointLight1 --
+	0.8	0.8	0.8	// color
+	-10.0	10.0	10.0	// position
+	1.0	0.0	0.0	// const, linear, quad atten
+
+#light_point -n PointLight1 --
+	1.0	1.0	1.0	// color
+	10.0	10.0	10.0	// position
+	1.0	0.0	0.0	// const, linear, quad atten
+
+#material -n m1 --
+	0.0	0.0	0.0	// ambient
+	1.0	0.0	1.0	// diffuse
+	1.0	0.0	0.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.6	0.0	1.4	// kspec ktrans refind
+
+#material -n m2 --
+	0.0	0.0	0.0	// ambient
+	1.0	0.0	1.0	// diffuse
+	1.0	0.0	1.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.6	0.0	1.4	// kspec ktrans refind
+
+#material -n m3 --
+	0.0	0.0	0.0	// ambient
+	0.5	0.5	0.5	// diffuse
+	0.0	0.0	0.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.0	0.8	1.4	// kspec ktrans refind
+
+#group_begin -n Group1 --
+	1.0	0.0	0.0	0.0
+	0.0	1.0	0.0	0.0
+	0.0	0.0	1.0	3.0
+	0.0	0.0	0.0	1.0
+
+	#triangle -n Triangle1 -m m3 --
+		5.0	0.0	0.0	// v0
+		-5.0	0.0	0.0	// v1
+		0.0	-5.0	0.0	// v2
+
+#group_end
+
+#group_begin -n Group2 --
+	1.0	0.0	0.0	1.0
+	0.0	1.0	0.0	1.0
+	0.0	0.0	1.0	1.0
+	0.0	0.0	0.0	1.0
+
+	#triangle -n Triangle2 -m m2 --
+		5.0	0.0	0.0	// v0
+		-5.0	0.0	0.0	// v1
+		0.0	-5.0	0.0	// v2
+
+	#group_begin -n Group3 --
+		1.0	0.0	0.0	1.0
+		0.0	1.0	0.0	1.0
+		0.0	0.0	1.0	1.0
+		0.0	0.0	0.0	1.0
+
+		#sphere -n Sphere1 -m m1 --
+			0.0	3.0	0.0	// position
+			3.0			// radius
+
+	#group_end
+
+#group_end
+
+#rayfile_end

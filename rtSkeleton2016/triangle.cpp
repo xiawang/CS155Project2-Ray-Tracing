@@ -64,9 +64,9 @@ double Triangle::intersect (Intersection& intersectionInfo)
                 intersectionInfo.iCoordinate = q;
                 
                 if(textured){
-                    TexCoord2d newW1 = t[1] - t[0];
-                    TexCoord2d newW2 = t[2] - t[0];
-                    TexCoord2d tex = t[0] + beta * newW1 + gamma * newW2;
+                    TexCoord2d nW1 = t[1] - t[0];
+                    TexCoord2d nW2 = t[2] - t[0];
+                    TexCoord2d tex = t[0] + beta * nW1 + gamma * nW2;
                     if(tex[0]>=0){
                         tex[0] = tex[0] - floor(tex[0]);
                     }else{

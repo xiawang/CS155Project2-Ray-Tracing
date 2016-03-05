@@ -113,8 +113,31 @@ const Color3d Material::getTexture(double u, double v)
 }
 const Color3d Material::getProceduralTexture(Point3d point)
 {
-	
-	return Color3d(0,0,0);
+    // create perlin noise
+    PerlinNoise* PN;
+    PN = new PerlinNoise(1314);
+    double noise = PN->noise(point[0], point[1], point[2]);
+//    double noise = 1;
+    
+    Color3d c1 = Color3d(0,0,0);
+    Color3d c2 = Color3d(0.3,0.2,0.1);
+    Color3d c3 = Color3d(0.6,0.5,0.4);
+    Color3d c4 = Color3d(0.9,0.8,0.7);
+    
+    Color3d fcolor;
+    
+    if ( noise <= -0.5 ) {
+        fcolor = c1;
+    } else if ( noise <= 0 ) {
+        fcolor = c2;
+    } else if ( noise <= 0.5 ) {
+        fcolor = c3;
+    } else {
+        fcolor = c4;
+    }
+    
+	return fcolor;
+//    return Color3d(0,0,0);
 
 }
 

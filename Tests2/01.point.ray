@@ -1,0 +1,40 @@
+#version HMCCS155FALL2002
+
+/*
+ * single point light on two triangles, one facing the camera, one
+ * facing away.  both have specular highlights near the center of the
+ * image, and both are fully lit by the point light.
+ */
+
+#background	0.0 0.0 0.0
+#ambient	0.0 0.0 0.0
+
+#camera
+	-3.0	0.0	0.0	// position
+	1.0	0.0	0.0	// facing
+	0.0	1.0	0.0	// up
+	30.0			// heightAngle
+
+#light_point -n PointLight1 --
+	1.0	1.0	1.0	// color
+	-4.0	0.0	0.0	// position
+	1.0	0.0	0.0	// const, linear, quad attenuation
+
+#material -n mSimple --
+	0.1	0.6	0.3	// ambient
+	0.1	0.6	0.3	// diffuse
+	1.0	1.0	1.0	// specular
+	0.0	0.0	0.0	// emissive
+	0.9	0.0	1.0	// kspec ktrans refind
+
+#triangle -n FrontFacingTriangle -m mSimple --
+	1.0	0.0	0.0	// v0
+	1.0	-1.0	1.5	// v1
+	1.0	1.0	1.5	// v2
+
+#triangle -n BackFacingTriangle -m mSimple --
+	1.0	0.0	0.0	// v0
+	1.0	-1.0	-1.5	// v1
+	1.0	1.0	-1.5	// v2
+
+#rayfile_end
